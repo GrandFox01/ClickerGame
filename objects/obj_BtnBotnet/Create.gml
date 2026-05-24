@@ -1,0 +1,9 @@
+// Create Event
+upgrade_type = "botnet";
+base_cost = 500;
+current_cost = global.cost_botnet;
+btn_x = 20;
+btn_y = 300;
+btn_w = 300;
+btn_h = 40;
+hover = false;

@@ -1,0 +1,9 @@
+// Create Event
+upgrade_type = "server";
+base_cost = 100;
+current_cost = global.cost_server;
+btn_x = 20;
+btn_y = 250;
+btn_w = 300;
+btn_h = 40;
+hover = false;
