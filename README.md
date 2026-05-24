@@ -1,102 +1,80 @@
-# Cyber-Hacker: Neural Network
+# 🕹️ Cyber-Hacker: Neural Network (v1.2)
 
-A cyberpunk-themed clicker game built with GameMaker Studio 2.
+Кликер-игра в стиле киберпанк, созданная на **GameMaker Studio 2**. Ваша цель — взломать глобальную нейросеть, накапливая данные и покупая улучшения.
 
-## 🎮 Game Concept
+## 🚀 Особенности v1.2
+- ✅ **Исправлен баг с покупкой улучшений**: Теперь используется `variable_global_get/set` для корректной работы с динамическими именами переменных.
+- ✅ **Исправлен шрифт**: Убраны ошибки регистра (`fnt_main`).
+- ✅ **UI Улучшен**: Текст кнопок теперь выравнивается корректно относительно спрайтов (Origin: Top Left).
+- ✅ **Структура обновлена**: Вместо одного объекта улучшений теперь 4 отдельных объекта кнопок для стабильности.
 
-You are a rookie hacker in a cyberpunk world. Your goal is to hack the global neural network "Omega" by accumulating resources ("Data" and "Crypto") through clicking and automated earnings, while purchasing upgrades.
+## 🛠️ Установка и Настройка
 
-## 📁 Project Structure
+### 1. Создание ресурсов в GameMaker Studio 2
+Перед запуском создайте следующие ресурсы вручную:
 
+#### 🎨 Спрайты (Sprites)
+1.  **`spr_core`** (64x64)
+    -   *Origin*: **Middle Center**
+    -   *Изображение*: Зеленый круг/шестиугольник с символом хакера.
+2.  **`spr_btn`** (200x40)
+    -   *Origin*: **Top Left** (Критично для UI!)
+    -   *Изображение*: Серый прямоугольник с рамкой.
+3.  **`spr_bg`** (800x600) - *Опционально*
+    -   *Origin*: **Top Left**
+    -   *Изображение*: Черный фон с зеленой сеткой.
+
+#### 🔤 Шрифт (Font)
+1.  **`fnt_main`**
+    -   *Шрифт*: Consolas, Courier New или любой моноширинный.
+    -   *Размер*: 20
+    -   *Стиль*: Bold
+
+#### 🧱 Объекты (Objects)
+Создайте **7 объектов** и вставьте код из папки `objects/`:
+-   `obj_Game` (Контроллер, инициализация)
+-   `obj_Core` (Кликабельное ядро)
+-   `obj_FloatingText` (Всплывающие цифры)
+-   `obj_BtnCursor` (Улучшение клика)
+-   `obj_BtnServer` (Авто-доход +2)
+-   `obj_BtnBotnet` (Авто-доход +15)
+-   `obj_BtnAI` (Авто-доход +50)
+
+> ⚠️ **Важно:** В версии 1.2 объект `obj_Upgrades` больше не используется! Используйте отдельные кнопки.
+
+### 2. Настройка комнаты (Room)
+1.  Создайте комнату (например, `room_main`).
+2.  Размер: **800x600**.
+3.  Цвет фона: Черный (если не используете `spr_bg`).
+4.  Добавьте только объект **`obj_Game`** в любую точку комнаты (он создаст остальные объекты сам).
+5.  Убедитесь, что существует слой **"Effects"** (для всплывающего текста), или создайте его.
+
+## 🎮 Геймплей
+-   **Data**: Основная валюта. Получается кликами и авто-доходом.
+-   **Crypto**: Редкая валюта (шанс 2% каждую секунду при наличии авто-дохода). Пока не используется, задел на будущее.
+-   **Upgrades**:
+    -   *Hack Tool*: Увеличивает силу клика.
+    -   *Server, Botnet, AI*: Увеличивают автоматический доход в секунду.
+    -   Цена растет после каждой покупки.
+
+## 📦 Структура проекта
+```text
+objects/
+├── obj_Game.gml          # Логика игры, генерация переменных
+├── obj_Core.gml          # Логика ядра
+├── obj_FloatingText.gml  # Эффекты текста
+├── obj_BtnCursor.gml     # Кнопка улучшения 1
+├── obj_BtnServer.gml     # Кнопка улучшения 2
+├── obj_BtnBotnet.gml     # Кнопка улучшения 3
+└── obj_BtnAI.gml         # Кнопка улучшения 4
 ```
-/workspace
-├── objects/
-│   ├── obj_Game.gml          # Main game controller
-│   ├── obj_Core.gml          # Clickable core object
-│   ├── obj_Upgrades.gml      # Upgrade system
-│   └── obj_FloatingText.gml  # Visual effects
-├── scripts/                   # (Optional custom scripts)
-├── datafiles/                 # (Save files, configs)
-└── README.md                  # This file
-```
 
-## 🛠 Setup Instructions
+## 🔗 Ссылки
+-   [Репозиторий на GitHub](https://github.com/GrandFox01/ClickerGame)
+-   [GameMaker Studio 2](https://gamemaker.io/)
 
-### 1. Create a New GameMaker Studio 2 Project
-- Open GMS2
-- Create new project
-- Set resolution to 800x600
-
-### 2. Create Objects
-Create the following objects and copy the corresponding `.gml` code:
-
-#### obj_Game (Persistent Object)
-- Place in room (doesn't need sprite)
-- Contains: Create, Step, Draw GUI events
-
-#### obj_Core
-- Create a sprite (green circle or tech icon)
-- Add Mouse Left Pressed and Draw events
-
-#### obj_Upgrades
-- Place in room (doesn't need sprite)
-- Add Draw GUI and Mouse Left Pressed events
-
-#### obj_FloatingText
-- No sprite needed
-- Add Create, Step, and Draw events
-
-### 3. Create Layers in Room
-- "Game" layer - for obj_Core and obj_Upgrades
-- "Effects" layer - for obj_FloatingText instances
-- "UI" layer - for obj_Game GUI elements
-
-### 4. Configure Room
-- Set background color to black (#000000)
-- Room size: 800x600
-- Place obj_Core in center (400, 300)
-- Place obj_Upgrades anywhere (renders via GUI)
-- Add persistent obj_Game
-
-## 🎯 Gameplay Mechanics
-
-### Resources
-- **Data**: Primary currency, earned by clicking and auto-hackers
-- **Crypto**: Rare currency, small chance from auto-income
-
-### Upgrades
-| Upgrade | Effect | Base Cost | Scaling |
-|---------|--------|-----------|---------|
-| Better Tool | +1 Click Power | 15 Data | ×1.5 |
-| Server Rack | +2 Auto/sec | 100 Data | ×1.4 |
-| Botnet Node | +15 Auto/sec | 500 Data | ×1.4 |
-| AI Core | +50 Auto/sec | 2000 Data | ×1.4 |
-
-## 🔧 Code Features
-
-- ✅ Global variable management
-- ✅ Exponential cost scaling
-- ✅ Auto-income system with timer
-- ✅ Floating text visual feedback
-- ✅ Dynamic UI coloring (green/red for affordability)
-- ✅ Pulse animation on core
-
-## 🚀 Future Enhancements
-
-Consider adding:
-- [ ] Save/Load system (datafiles)
-- [ ] Prestige/Rebirth mechanic
-- [ ] Achievements system
-- [ ] Sound effects and music
-- [ ] Particle effects
-- [ ] Mini-games for bonus rewards
-- [ ] Story elements/lore
-- [ ] Multiple hacking targets
-
-## 📝 License
-
-Free to use and modify for your projects!
+## 📝 Лицензия
+Свободное использование для обучения и модификации.
 
 ---
-
-**Made with ❤️ for GameMaker Studio 2**
+*Версия: 1.2 | Статус: Stable*
