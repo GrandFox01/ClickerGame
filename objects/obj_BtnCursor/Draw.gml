@@ -1,8 +1,10 @@
 // Draw Event
 // Определяем цвет кнопки
+var current_cost = variable_global_get("cost_" + upgrade_type);
+
 if (global.data >= current_cost) {
     if (hover) {
-        draw_set_color(c lime);  // Ярко-зеленый при наведении
+        draw_set_color(c_lime);  // Ярко-зеленый при наведении
     } else {
         draw_set_color(c_green); // Зеленый если хватает денег
     }
@@ -19,7 +21,7 @@ draw_rectangle(btn_x, btn_y, btn_x + btn_w, btn_y + btn_h, false);
 
 // Рисуем текст
 draw_set_color(c_white);
-draw_set_font(fnt_Main);
+draw_set_font(fnt_main);
 var desc = "";
 var bonus = "";
 
