@@ -1,9 +1,0 @@
-// Create Event
-upgrade_type = "cursor";
-base_cost = 15;
-current_cost = global.cost_cursor;
-btn_x = 20;
-btn_y = 200;
-btn_w = 300;
-btn_h = 40;
-hover = false;

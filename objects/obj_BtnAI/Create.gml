@@ -1,9 +1,0 @@
-// Create Event
-upgrade_type = "ai";
-base_cost = 2000;
-current_cost = global.cost_ai;
-btn_x = 20;
-btn_y = 350;
-btn_w = 300;
-btn_h = 40;
-hover = false;
